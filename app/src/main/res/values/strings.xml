@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="signup">Signup</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="copyright">© 2021 Dicoding</string>
+    <string name="logout">Keluar</string>
+    <string name="min_length_char">Minimimal Length %1$d characters</string>
+    <string name="email_hint">Text your email</string>
+    <string name="pass_hint">Text your password</string>
+    <string name="login_ket">Don\'t have any account ?</string>
+    <string name="image_login">image login</string>
+    <string name="invalid_email">Format email is invalid!</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Text your name</string>
+    <string name="signup_ket">Already have an account ?</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="hint_desc">Text your description</string>
+    <string name="avatar">avatar</string>
+    <string name="username">username</string>
+    <string name="message_validation">Enter your %1$s</string>
+</resources>
