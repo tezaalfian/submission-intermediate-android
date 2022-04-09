@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_signup"
         app:layout_constraintTop_toBottomOf="@+id/tv_signup" />
 
-    <EditText
+    <com.tezaalfian.storyapp.customview.MyEditText
         android:id="@+id/edt_name"
         android:hint="@string/name_hint"
         android:layout_width="0dp"

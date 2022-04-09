@@ -27,7 +27,7 @@ class PasswordEditText : MyEditText {
                 // Do nothing.
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (text?.length in 1..6){
+                if (text?.length in 1..5){
                     error = resources.getString(R.string.min_length_char, 6)
                 }
             }
