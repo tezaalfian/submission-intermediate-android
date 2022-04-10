@@ -36,9 +36,9 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.btnSignup.setOnClickListener {
-            val name = binding.edtName.text.toString()
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
+            val name = binding.edtName.text.toString().trim()
+            val email = binding.edtEmail.text.toString().trim()
+            val password = binding.edtPassword.text.toString().trim()
             when {
                 name.isEmpty() -> {
                     binding.edtName.error = resources.getString(R.string.message_validation, "name")

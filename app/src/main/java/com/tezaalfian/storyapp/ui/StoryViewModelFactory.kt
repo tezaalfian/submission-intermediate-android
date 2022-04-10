@@ -8,15 +8,23 @@ import com.tezaalfian.storyapp.data.UserRepository
 import com.tezaalfian.storyapp.di.StoryInjection
 import com.tezaalfian.storyapp.di.UserInjection
 import com.tezaalfian.storyapp.ui.main.MainViewModel
+import com.tezaalfian.storyapp.ui.story.StoryViewModel
 
 class StoryViewModelFactory private constructor(private val userRepo: UserRepository, private val storyRepo: StoryRepository) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(userRepo, storyRepo) as T
+        return when {
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(userRepo, storyRepo) as T
+            }
+            modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
+                StoryViewModel(userRepo, storyRepo) as T
+            }
+            else -> {
+                throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+            }
         }
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 
     companion object {

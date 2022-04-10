@@ -26,4 +26,8 @@
     <string name="login_success">Login success!</string>
     <string name="created_at">Created At</string>
     <string name="description">Description</string>
+    <string name="add_story">Add Story</string>
+    <string name="permission_denied">Can\'t get permission</string>
+    <string name="input_your_image">Please upload your image first!</string>
+    <string name="choose_picture">Choose a Picture</string>
 </resources>

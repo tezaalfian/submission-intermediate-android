@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.edtEmail.text.toString()
-            val password = binding.edtPassword.text.toString()
+            val email = binding.edtEmail.text.toString().trim()
+            val password = binding.edtPassword.text.toString().trim()
             when {
                 email.isEmpty() -> {
                     binding.edtEmail.error = resources.getString(R.string.message_validation, "email")

@@ -19,6 +19,7 @@ import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.response.ListStoryItem
 import com.tezaalfian.storyapp.ui.detail.DetailActivity
+import com.tezaalfian.storyapp.ui.story.StoryActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                                 binding.progressBar.visibility = View.GONE
                                 Toast.makeText(
                                     this,
-                                    "Terjadi kesalahan" + result.error,
+                                    "Failure : " + result.error,
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -102,6 +103,10 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.logout -> {
                 mainViewModel.logout()
+                true
+            }
+            R.id.add_story -> {
+                startActivity(Intent(this, StoryActivity::class.java))
                 true
             }
             else -> true
