@@ -1,8 +1,9 @@
-package com.tezaalfian.storyapp.data
+package com.tezaalfian.storyapp.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.response.StoriesResponse
 import com.tezaalfian.storyapp.data.response.UploadStoryResponse
 import com.tezaalfian.storyapp.data.retrofit.ApiService

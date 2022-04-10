@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.tezaalfian.storyapp.data.StoryRepository
-import com.tezaalfian.storyapp.data.UserRepository
+import com.tezaalfian.storyapp.data.repository.StoryRepository
+import com.tezaalfian.storyapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val userRepo: UserRepository, private val storyRepo: StoryRepository) : ViewModel() {

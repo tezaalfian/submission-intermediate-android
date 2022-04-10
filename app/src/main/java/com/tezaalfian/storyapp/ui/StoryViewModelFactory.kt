@@ -3,8 +3,8 @@ package com.tezaalfian.storyapp.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.tezaalfian.storyapp.data.StoryRepository
-import com.tezaalfian.storyapp.data.UserRepository
+import com.tezaalfian.storyapp.data.repository.StoryRepository
+import com.tezaalfian.storyapp.data.repository.UserRepository
 import com.tezaalfian.storyapp.di.StoryInjection
 import com.tezaalfian.storyapp.di.UserInjection
 import com.tezaalfian.storyapp.ui.main.MainViewModel

@@ -1,7 +1,7 @@
 package com.tezaalfian.storyapp.ui.signup
 
 import androidx.lifecycle.ViewModel
-import com.tezaalfian.storyapp.data.UserRepository
+import com.tezaalfian.storyapp.data.repository.UserRepository
 
 class SignupViewModel(private val repo: UserRepository) : ViewModel() {
 

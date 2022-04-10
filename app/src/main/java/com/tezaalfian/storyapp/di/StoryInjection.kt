@@ -1,7 +1,7 @@
 package com.tezaalfian.storyapp.di
 
 import android.content.Context
-import com.tezaalfian.storyapp.data.StoryRepository
+import com.tezaalfian.storyapp.data.repository.StoryRepository
 import com.tezaalfian.storyapp.data.retrofit.ApiConfig
 
 object StoryInjection {

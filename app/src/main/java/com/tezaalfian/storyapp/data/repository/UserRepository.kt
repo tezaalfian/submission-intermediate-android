@@ -1,4 +1,4 @@
-package com.tezaalfian.storyapp.data
+package com.tezaalfian.storyapp.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.response.LoginResponse
 import com.tezaalfian.storyapp.data.response.RegisterResponse
 import com.tezaalfian.storyapp.data.retrofit.ApiService
