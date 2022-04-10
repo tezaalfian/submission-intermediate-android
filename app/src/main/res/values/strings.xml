@@ -5,8 +5,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="copyright">© 2021 Dicoding</string>
-    <string name="logout">Keluar</string>
-    <string name="min_length_char">Minimimal Length %1$d characters</string>
+    <string name="logout">Logout</string>
+    <string name="min_length_char">Minimal Length %1$d characters</string>
     <string name="email_hint">Text your email</string>
     <string name="pass_hint">Text your password</string>
     <string name="login_ket">Don\'t have any account ?</string>
@@ -30,4 +30,5 @@
     <string name="permission_denied">Can\'t get permission</string>
     <string name="input_your_image">Please upload your image first!</string>
     <string name="choose_picture">Choose a Picture</string>
+    <string name="setting">Setting</string>
 </resources>

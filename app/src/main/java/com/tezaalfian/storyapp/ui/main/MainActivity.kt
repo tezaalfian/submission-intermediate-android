@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -110,6 +111,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.add_story -> {
                 startActivity(Intent(this, StoryActivity::class.java))
+                true
+            }
+            R.id.setting -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
             else -> true
