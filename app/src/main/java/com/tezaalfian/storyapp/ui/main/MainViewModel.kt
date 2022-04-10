@@ -14,6 +14,10 @@ class MainViewModel(private val userRepo: UserRepository, private val storyRepo:
         return userRepo.getToken().asLiveData()
     }
 
+    fun isLogin() : LiveData<Boolean>{
+        return userRepo.isLogin().asLiveData()
+    }
+
     fun logout() {
         viewModelScope.launch {
             userRepo.logout()

@@ -48,11 +48,14 @@ class MainActivity : AppCompatActivity() {
             factory
         )[MainViewModel::class.java]
 
-        mainViewModel.getToken().observe(this){ token ->
-            if (token.isEmpty()){
+        mainViewModel.isLogin().observe(this){
+            if (!it){
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
-            }else{
+            }
+        }
+        mainViewModel.getToken().observe(this){ token ->
+            if (token.isNotEmpty()){
                 mainViewModel.getStories(token).observe(this){result ->
                     if (result != null){
                         when(result) {

@@ -110,9 +110,6 @@ class StoryActivity : AppCompatActivity() {
                     file.name,
                     requestImageFile
                 )
-                Log.d("StoryActivity", descMedia.toString())
-                Log.d("StoryActivity", token)
-                Log.d("StoryActivity", imageMultipart.toString())
                 storyViewModel.uploadStory(token, imageMultipart, descMedia).observe(this){ result ->
                     if (result != null){
                         when(result) {

@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                                         Toast.makeText(this@LoginActivity, user.message, Toast.LENGTH_SHORT).show()
                                     }else{
                                         val token = user.loginResult?.token ?: ""
-                                        loginViewModel.setToken(token)
+                                        loginViewModel.setToken(token, true)
                                         AlertDialog.Builder(this@LoginActivity).apply {
                                             setTitle("Yeah!")
                                             setMessage(resources.getString(R.string.login_success))

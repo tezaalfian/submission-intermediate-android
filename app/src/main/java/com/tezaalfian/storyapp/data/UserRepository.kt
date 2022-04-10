@@ -2,6 +2,7 @@ package com.tezaalfian.storyapp.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
@@ -46,15 +47,23 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun setToken(token: String) {
+    fun isLogin() : Flow<Boolean> {
+        return dataStore.data.map { preferences ->
+            preferences[STATE_KEY] ?: false
+        }
+    }
+
+    suspend fun setToken(token: String, isLogin: Boolean) {
         dataStore.edit { preferences ->
             preferences[TOKEN] = token
+            preferences[STATE_KEY] = isLogin
         }
     }
 
     suspend fun logout() {
         dataStore.edit { preferences ->
             preferences[TOKEN] = ""
+            preferences[STATE_KEY] = false
         }
     }
 
@@ -63,6 +72,7 @@ class UserRepository private constructor(
         private var INSTANCE: UserRepository? = null
 
         private val TOKEN = stringPreferencesKey("token")
+        private val STATE_KEY = booleanPreferencesKey("state")
 
         fun getInstance(
             dataStore: DataStore<Preferences>,
