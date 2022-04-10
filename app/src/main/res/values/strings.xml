@@ -22,7 +22,6 @@
     <string name="avatar">avatar</string>
     <string name="username">username</string>
     <string name="message_validation">Enter your %1$s</string>
-    <string name="signup_success">Your account successfully created!</string>
     <string name="next">Next</string>
     <string name="login_success">Login success!</string>
     <string name="created_at">Created At</string>

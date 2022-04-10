@@ -1,6 +1,5 @@
 package com.tezaalfian.storyapp.data.retrofit
 
-import com.tezaalfian.storyapp.data.UserRegister
 import com.tezaalfian.storyapp.data.response.FileUploadResponse
 import com.tezaalfian.storyapp.data.response.LoginResponse
 import com.tezaalfian.storyapp.data.response.RegisterResponse
@@ -11,12 +10,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    @Multipart
-    @POST("stories/guest")
-    fun uploadStory(
-        @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody,
-    ): Call<FileUploadResponse>
 
     @FormUrlEncoded
     @POST("register")
@@ -36,13 +29,11 @@ interface ApiService {
     @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
-//        @Query("page") page: Int?,
-//        @Query("size") size: Int?
     ): StoriesResponse
 
     @Multipart
     @POST("stories")
-    suspend fun addStory(
+    suspend fun uploadStory(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody

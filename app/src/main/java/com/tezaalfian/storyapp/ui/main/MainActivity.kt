@@ -1,30 +1,20 @@
 package com.tezaalfian.storyapp.ui.main
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.adapter.ListStoryAdapter
-import com.tezaalfian.storyapp.data.StoryRepository
-import com.tezaalfian.storyapp.data.UserRepository
 import com.tezaalfian.storyapp.databinding.ActivityMainBinding
 import com.tezaalfian.storyapp.ui.StoryViewModelFactory
-import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.response.ListStoryItem
@@ -75,8 +65,8 @@ class MainActivity : AppCompatActivity() {
                                 binding.rvStories.adapter = listStoryAdapter
 
                                 listStoryAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback {
-                                    override fun onItemClicked(story: ListStoryItem) {
-                                        showSelectedStory(story)
+                                    override fun onItemClicked(data: ListStoryItem) {
+                                        showSelectedStory(data)
                                     }
                                 })
                             }

@@ -1,30 +1,18 @@
 package com.tezaalfian.storyapp.ui.login
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.tezaalfian.storyapp.R
-import com.tezaalfian.storyapp.data.UserRepository
-import com.tezaalfian.storyapp.data.response.LoginResponse
-import com.tezaalfian.storyapp.data.retrofit.ApiConfig
 import com.tezaalfian.storyapp.databinding.ActivityLoginBinding
 import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.main.MainActivity
 import com.tezaalfian.storyapp.ui.signup.SignupActivity
 import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.ui.signup.SignupViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
@@ -99,10 +87,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun setupViewModel() {
