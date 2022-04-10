@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/img_avatar"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:contentDescription="@string/avatar"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -34,6 +34,7 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="2"
+            android:layout_marginTop="8dp"
             card_view:layout_constraintTop_toBottomOf="@id/img_avatar"
             card_view:layout_constraintEnd_toEndOf="@id/img_avatar"
             card_view:layout_constraintStart_toStartOf="@+id/img_avatar"

@@ -24,4 +24,7 @@
     <string name="message_validation">Enter your %1$s</string>
     <string name="signup_success">Your account successfully created!</string>
     <string name="next">Next</string>
+    <string name="login_success">Login success!</string>
+    <string name="created_at">Created At</string>
+    <string name="description">Description</string>
 </resources>

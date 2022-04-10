@@ -11,24 +11,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
 import com.tezaalfian.storyapp.R
-import com.tezaalfian.storyapp.data.UserRegister
-import com.tezaalfian.storyapp.data.UserRepository
-import com.tezaalfian.storyapp.data.local.UserPreference
 import com.tezaalfian.storyapp.data.response.RegisterResponse
 import com.tezaalfian.storyapp.data.retrofit.ApiConfig
 import com.tezaalfian.storyapp.databinding.ActivitySignupBinding
-import com.tezaalfian.storyapp.ui.UserViewModelFactory
-import com.tezaalfian.storyapp.ui.main.MainActivity
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
+import com.tezaalfian.storyapp.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.data.retrofit.ApiService
-import kotlinx.coroutines.flow.collect
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")
 
@@ -49,10 +39,10 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        signupViewModel = ViewModelProvider(
-            this,
-            UserViewModelFactory(UserRepository.getInstance(UserPreference.getInstance(dataStore)))
-        )[SignupViewModel::class.java]
+//        signupViewModel = ViewModelProvider(
+//            this,
+//            UserViewModelFactory(UserRepository.getInstance(UserPreference.getInstance(dataStore)))
+//        )[SignupViewModel::class.java]
     }
 
     private fun setupAction() {
@@ -145,7 +135,7 @@ class SignupActivity : AppCompatActivity() {
         }
 
         binding.tvLogin.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
