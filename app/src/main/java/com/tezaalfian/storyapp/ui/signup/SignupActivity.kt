@@ -11,16 +11,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.data.response.RegisterResponse
 import com.tezaalfian.storyapp.data.retrofit.ApiConfig
 import com.tezaalfian.storyapp.databinding.ActivitySignupBinding
+import com.tezaalfian.storyapp.ui.StoryViewModelFactory
+import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.login.LoginActivity
+import com.tezaalfian.storyapp.data.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token")
 
 class SignupActivity : AppCompatActivity() {
 
@@ -39,10 +41,8 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-//        signupViewModel = ViewModelProvider(
-//            this,
-//            UserViewModelFactory(UserRepository.getInstance(UserPreference.getInstance(dataStore)))
-//        )[SignupViewModel::class.java]
+        val factory: UserViewModelFactory = UserViewModelFactory.getInstance(this)
+        signupViewModel = ViewModelProvider(this, factory)[SignupViewModel::class.java]
     }
 
     private fun setupAction() {
@@ -61,75 +61,40 @@ class SignupActivity : AppCompatActivity() {
                     binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
                 }
                 else -> {
-//                    signupViewModel.register(name, email, password).observe(this){ result ->
-//                        if (result != null){
-//                            when(result) {
-//                                is Result.Loading -> {
-//                                    binding.progressBar.visibility = View.VISIBLE
-//                                }
-//                                is Result.Success -> {
-//                                    binding.progressBar.visibility = View.GONE
-//                                    val user = result.data
-//                                        if (user.error){
-//                                            Toast.makeText(this@SignupActivity, user.message, Toast.LENGTH_SHORT).show()
-//                                        }else{
-//                                            AlertDialog.Builder(this@SignupActivity).apply {
-//                                                setTitle("Yeah!")
-//                                                setMessage("Your account successfully created!")
-//                                                setPositiveButton("Next") { _, _ ->
-//                                                    finish()
-//                                                }
-//                                                create()
-//                                                show()
-//                                            }
-//                                        }
-//                                }
-//                                is Result.Error -> {
-//                                    binding.progressBar.visibility = View.GONE
-//                                    Toast.makeText(
-//                                        this,
-//                                        "Terjadi kesalahan" + result.error,
-//                                        Toast.LENGTH_SHORT
-//                                    ).show()
-//                                }
-//                            }
-//                        }
-//                    }
-                    showLoading(true)
-                    val client = ApiConfig.getApiService().register(name, email, password)
-                    client.enqueue(object : Callback<RegisterResponse> {
-                        override fun onResponse(
-                            call: Call<RegisterResponse>,
-                            response: Response<RegisterResponse>
-                        ) {
-                            showLoading(false)
-                            if (response.isSuccessful) {
-                                val result = response.body()
-                                if (result != null) {
-                                    if (result.error){
-                                        Toast.makeText(this@SignupActivity, result.message, Toast.LENGTH_SHORT).show()
-                                    }else{
-                                        AlertDialog.Builder(this@SignupActivity).apply {
-                                            setTitle("Yeah!")
-                                            setMessage(resources.getString(R.string.signup_success))
-                                            setPositiveButton(resources.getString(R.string.next)) { _, _ ->
-                                                finish()
-                                            }
-                                            create()
-                                            show()
-                                        }
-                                    }
+                    signupViewModel.register(name, email, password).observe(this){ result ->
+                        if (result != null){
+                            when(result) {
+                                is Result.Loading -> {
+                                    binding.progressBar.visibility = View.VISIBLE
                                 }
-                            } else {
-                                Toast.makeText(this@SignupActivity, response.message(), Toast.LENGTH_SHORT).show()
+                                is Result.Success -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    val user = result.data
+                                        if (user.error){
+                                            Toast.makeText(this@SignupActivity, user.message, Toast.LENGTH_SHORT).show()
+                                        }else{
+                                            AlertDialog.Builder(this@SignupActivity).apply {
+                                                setTitle("Yeah!")
+                                                setMessage("Your account successfully created!")
+                                                setPositiveButton("Next") { _, _ ->
+                                                    finish()
+                                                }
+                                                create()
+                                                show()
+                                            }
+                                        }
+                                }
+                                is Result.Error -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(
+                                        this,
+                                        "Terjadi kesalahan" + result.error,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
-                        override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                            showLoading(false)
-                            Log.d("Register", t.message.toString())
-                            Toast.makeText(this@SignupActivity, t.message.toString(), Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                    }
                 }
             }
         }

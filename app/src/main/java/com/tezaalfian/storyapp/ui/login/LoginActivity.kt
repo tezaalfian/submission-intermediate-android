@@ -20,11 +20,11 @@ import com.tezaalfian.storyapp.databinding.ActivityLoginBinding
 import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.main.MainActivity
 import com.tezaalfian.storyapp.ui.signup.SignupActivity
+import com.tezaalfian.storyapp.data.Result
+import com.tezaalfian.storyapp.ui.signup.SignupViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class LoginActivity : AppCompatActivity() {
 
@@ -59,21 +59,19 @@ class LoginActivity : AppCompatActivity() {
                     binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
                 }
                 else -> {
-                    showLoading(true)
-                    val client = ApiConfig.getApiService().login(email, password)
-                    client.enqueue(object : Callback<LoginResponse> {
-                        override fun onResponse(
-                            call: Call<LoginResponse>,
-                            response: Response<LoginResponse>
-                        ) {
-                            showLoading(false)
-                            if (response.isSuccessful) {
-                                val result = response.body()
-                                if (result != null) {
-                                    if (result.error){
-                                        Toast.makeText(this@LoginActivity, result.message, Toast.LENGTH_SHORT).show()
+                    loginViewModel.login(email, password).observe(this){result ->
+                        if (result != null){
+                            when(result) {
+                                is Result.Loading -> {
+                                    binding.progressBar.visibility = View.VISIBLE
+                                }
+                                is Result.Success -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    val user = result.data
+                                    if (user.error){
+                                        Toast.makeText(this@LoginActivity, user.message, Toast.LENGTH_SHORT).show()
                                     }else{
-                                        val token = result.loginResult?.token ?: ""
+                                        val token = user.loginResult?.token ?: ""
                                         loginViewModel.setToken(token)
                                         AlertDialog.Builder(this@LoginActivity).apply {
                                             setTitle("Yeah!")
@@ -87,16 +85,17 @@ class LoginActivity : AppCompatActivity() {
                                         }
                                     }
                                 }
-                            } else {
-                                Toast.makeText(this@LoginActivity, response.message(), Toast.LENGTH_SHORT).show()
+                                is Result.Error -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(
+                                        this,
+                                        "Terjadi kesalahan" + result.error,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
-                        override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                            showLoading(false)
-                            Log.d("Register", t.message.toString())
-                            Toast.makeText(this@LoginActivity, t.message.toString(), Toast.LENGTH_SHORT).show()
-                        }
-                    })
+                    }
                 }
             }
         }
@@ -107,10 +106,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        loginViewModel = ViewModelProvider(
-            this,
-            UserViewModelFactory(UserRepository.getInstance(dataStore))
-        )[LoginViewModel::class.java]
+        val factory: UserViewModelFactory = UserViewModelFactory.getInstance(this)
+        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         loginViewModel.getToken().observe(this){ token ->
             if (token.isNotEmpty()){

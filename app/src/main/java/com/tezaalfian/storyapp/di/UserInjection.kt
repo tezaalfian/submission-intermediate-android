@@ -12,6 +12,6 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 object UserInjection {
     fun provideRepository(context: Context): UserRepository {
         val apiService = ApiConfig.getApiService()
-        return UserRepository.getInstance(context.dataStore)
+        return UserRepository.getInstance(context.dataStore, apiService)
     }
 }
