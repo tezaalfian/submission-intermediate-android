@@ -10,49 +10,46 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MediaUtils {
-    companion object {
-        private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+object MediaUtils {
+    private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
-        private val timeStamp: String = SimpleDateFormat(
-            FILENAME_FORMAT,
-            Locale.US
-        ).format(System.currentTimeMillis())
+    private val timeStamp: String = SimpleDateFormat(
+        FILENAME_FORMAT,
+        Locale.US
+    ).format(System.currentTimeMillis())
 
-        // Untuk kasus Intent Camera
-        fun createTempFile(context: Context): File {
-            val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-            return File.createTempFile(timeStamp, ".jpg", storageDir)
-        }
+    // Untuk kasus Intent Camera
+    fun createTempFile(context: Context): File {
+        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(timeStamp, ".jpg", storageDir)
+    }
 
-        fun uriToFile(selectedImg: Uri, context: Context): File {
-            val contentResolver: ContentResolver = context.contentResolver
-            val myFile = createTempFile(context)
+    fun uriToFile(selectedImg: Uri, context: Context): File {
+        val contentResolver: ContentResolver = context.contentResolver
+        val myFile = createTempFile(context)
 
-            val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
-            val outputStream: OutputStream = FileOutputStream(myFile)
-            val buf = ByteArray(1024)
-            var len: Int
-            while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
-            outputStream.close()
-            inputStream.close()
+        val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
+        val outputStream: OutputStream = FileOutputStream(myFile)
+        val buf = ByteArray(1024)
+        var len: Int
+        while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
+        outputStream.close()
+        inputStream.close()
+        return myFile
+    }
 
-            return myFile
-        }
-
-        fun reduceFileImage(file: File): File {
-            val bitmap = BitmapFactory.decodeFile(file.path)
-            var compressQuality = 100
-            var streamLength: Int
-            do {
-                val bmpStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
-                val bmpPicByteArray = bmpStream.toByteArray()
-                streamLength = bmpPicByteArray.size
-                compressQuality -= 5
-            } while (streamLength > 1000000)
+    fun reduceFileImage(file: File): File {
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        var compressQuality = 100
+        var streamLength: Int
+        do {
+            val bmpStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            compressQuality -= 5
+        } while (streamLength > 1000000)
             bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-            return file
-        }
+        return file
     }
 }

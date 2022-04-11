@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.tezaalfian.storyapp.data.response.ListStoryItem
 import com.tezaalfian.storyapp.databinding.ActivityDetailBinding
+import com.tezaalfian.storyapp.utils.setLocalDateFormat
 
 class DetailActivity : AppCompatActivity() {
 
@@ -20,12 +21,11 @@ class DetailActivity : AppCompatActivity() {
         val story = intent.getParcelableExtra<ListStoryItem>(EXTRA_STORY)
         binding.apply {
             tvUsername.text = story?.name
-            tvCreatedAt.text = story?.createdAt
+            tvCreatedAt.setLocalDateFormat(story?.createdAt.toString())
             tvDescription.text = story?.description
         }
         Glide.with(this)
             .load(story?.photoUrl)
-            .circleCrop()
             .into(binding.imgAvatar)
     }
 

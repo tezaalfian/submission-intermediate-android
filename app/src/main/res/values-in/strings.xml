@@ -31,4 +31,6 @@
     <string name="input_your_image">Upload gambar terlebih dahulu!</string>
     <string name="choose_picture">Pilih gambar</string>
     <string name="setting">Pengaturan</string>
+    <string name="login_error">Masuk gagal, silahkan coba lagi!</string>
+    <string name="signup_error">Daftar gagal, silahkan coba lagi!</string>
 </resources>

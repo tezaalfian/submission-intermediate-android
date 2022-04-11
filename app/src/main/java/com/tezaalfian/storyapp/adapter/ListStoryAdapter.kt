@@ -24,10 +24,12 @@ class ListStoryAdapter(private val listStory: ArrayList<ListStoryItem>) : Recycl
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val story = listStory[position]
-        holder.binding.tvUsername.text = story.name
+        holder.binding.apply {
+            tvUsername.text = story.name
+            tvDescription.text = story.description
+        }
         Glide.with(holder.itemView.context)
             .load(story.photoUrl)
-            .circleCrop()
             .into(holder.binding.imgAvatar)
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listStory[holder.adapterPosition])

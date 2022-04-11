@@ -31,4 +31,6 @@
     <string name="input_your_image">Please upload your image first!</string>
     <string name="choose_picture">Choose a Picture</string>
     <string name="setting">Setting</string>
+    <string name="login_error">Login failure, please try again!</string>
+    <string name="signup_error">Signup failure, please try again!</string>
 </resources>

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.databinding.ActivityLoginBinding
@@ -15,6 +14,7 @@ import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.main.MainActivity
 import com.tezaalfian.storyapp.ui.signup.SignupActivity
 import com.tezaalfian.storyapp.data.Result
+import com.tezaalfian.storyapp.utils.animateVisibility
 
 class LoginActivity : AppCompatActivity() {
 
@@ -62,50 +62,44 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.edtEmail.text.toString().trim()
-            val password = binding.edtPassword.text.toString().trim()
-            when {
-                email.isEmpty() -> {
-                    binding.edtEmail.error = resources.getString(R.string.message_validation, "email")
-                }
-                password.isEmpty() -> {
-                    binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
-                }
-                else -> {
-                    loginViewModel.login(email, password).observe(this){result ->
-                        if (result != null){
-                            when(result) {
-                                is Result.Loading -> {
-                                    binding.progressBar.visibility = View.VISIBLE
+            login()
+        }
+    }
+
+    private fun login() {
+        val email = binding.edtEmail.text.toString().trim()
+        val password = binding.edtPassword.text.toString().trim()
+        when {
+            email.isEmpty() -> {
+                binding.edtEmail.error = resources.getString(R.string.message_validation, "email")
+            }
+            password.isEmpty() -> {
+                binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
+            }
+            else -> {
+                loginViewModel.login(email, password).observe(this){result ->
+                    if (result != null){
+                        when(result) {
+                            is Result.Loading -> {
+                                showLoading(true)
+                            }
+                            is Result.Success -> {
+                                showLoading(false)
+                                val user = result.data
+                                if (user.error){
+                                    Toast.makeText(this@LoginActivity, user.message, Toast.LENGTH_SHORT).show()
+                                }else{
+                                    val token = user.loginResult?.token ?: ""
+                                    loginViewModel.setToken(token, true)
                                 }
-                                is Result.Success -> {
-                                    binding.progressBar.visibility = View.GONE
-                                    val user = result.data
-                                    if (user.error){
-                                        Toast.makeText(this@LoginActivity, user.message, Toast.LENGTH_SHORT).show()
-                                    }else{
-                                        val token = user.loginResult?.token ?: ""
-                                        loginViewModel.setToken(token, true)
-                                        AlertDialog.Builder(this@LoginActivity).apply {
-                                            setTitle("Yeah!")
-                                            setMessage(resources.getString(R.string.login_success))
-                                            setPositiveButton(resources.getString(R.string.next)) { _, _ ->
-                                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                                startActivity(intent)
-                                            }
-                                            create()
-                                            show()
-                                        }
-                                    }
-                                }
-                                is Result.Error -> {
-                                    binding.progressBar.visibility = View.GONE
-                                    Toast.makeText(
-                                        this,
-                                        "Terjadi kesalahan" + result.error,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                            }
+                            is Result.Error -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this,
+                                    resources.getString(R.string.login_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
@@ -122,6 +116,20 @@ class LoginActivity : AppCompatActivity() {
             if (token.isNotEmpty()){
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            edtEmail.isEnabled = !isLoading
+            edtPassword.isEnabled = !isLoading
+            btnLogin.isEnabled = !isLoading
+
+            if (isLoading) {
+                viewProgressbar.animateVisibility(true)
+            } else {
+                viewProgressbar.animateVisibility(false)
             }
         }
     }

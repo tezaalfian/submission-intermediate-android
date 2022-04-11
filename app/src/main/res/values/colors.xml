@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="navi">#2D3D4F</color>
+    <color name="transparent_purple">#66B4EFE9</color>
 </resources>

@@ -5,7 +5,7 @@ import com.tezaalfian.storyapp.data.repository.StoryRepository
 import com.tezaalfian.storyapp.data.retrofit.ApiConfig
 
 object StoryInjection {
-    fun provideRepository(context: Context): StoryRepository {
+    fun provideRepository(): StoryRepository {
         val apiService = ApiConfig.getApiService()
         return StoryRepository.getInstance(apiService)
     }

@@ -14,6 +14,7 @@ import com.tezaalfian.storyapp.databinding.ActivitySignupBinding
 import com.tezaalfian.storyapp.ui.UserViewModelFactory
 import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
+import com.tezaalfian.storyapp.utils.animateVisibility
 
 class SignupActivity : AppCompatActivity() {
 
@@ -81,10 +82,10 @@ class SignupActivity : AppCompatActivity() {
                         if (result != null){
                             when(result) {
                                 is Result.Loading -> {
-                                    binding.progressBar.visibility = View.VISIBLE
+                                    showLoading(true)
                                 }
                                 is Result.Success -> {
-                                    binding.progressBar.visibility = View.GONE
+                                    showLoading(false)
                                     val user = result.data
                                         if (user.error){
                                             Toast.makeText(this@SignupActivity, user.message, Toast.LENGTH_SHORT).show()
@@ -101,10 +102,10 @@ class SignupActivity : AppCompatActivity() {
                                         }
                                 }
                                 is Result.Error -> {
-                                    binding.progressBar.visibility = View.GONE
+                                    showLoading(false)
                                     Toast.makeText(
                                         this,
-                                        "Terjadi kesalahan" + result.error,
+                                        resources.getString(R.string.signup_error),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -118,6 +119,21 @@ class SignupActivity : AppCompatActivity() {
         binding.tvLogin.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            edtEmail.isEnabled = !isLoading
+            edtPassword.isEnabled = !isLoading
+            edtName.isEnabled = !isLoading
+            btnSignup.isEnabled = !isLoading
+
+            if (isLoading) {
+                viewProgressbar.animateVisibility(true)
+            } else {
+                viewProgressbar.animateVisibility(false)
+            }
         }
     }
 }
