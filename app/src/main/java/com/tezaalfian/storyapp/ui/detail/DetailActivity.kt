@@ -3,7 +3,9 @@ package com.tezaalfian.storyapp.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.tezaalfian.storyapp.data.response.ListStoryItem
+import com.tezaalfian.storyapp.R
+import com.tezaalfian.storyapp.data.local.entity.Story
+import com.tezaalfian.storyapp.data.remote.response.ListStoryItem
 import com.tezaalfian.storyapp.databinding.ActivityDetailBinding
 import com.tezaalfian.storyapp.utils.setLocalDateFormat
 
@@ -18,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
 
         title = "Story Detail"
 
-        val story = intent.getParcelableExtra<ListStoryItem>(EXTRA_STORY)
+        val story = intent.getParcelableExtra<Story>(EXTRA_STORY)
         binding.apply {
             tvUsername.text = story?.name
             tvCreatedAt.setLocalDateFormat(story?.createdAt.toString())
@@ -26,6 +28,8 @@ class DetailActivity : AppCompatActivity() {
         }
         Glide.with(this)
             .load(story?.photoUrl)
+            .placeholder(R.drawable.image_loading)
+            .error(R.drawable.image_error)
             .into(binding.imgAvatar)
     }
 

@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,11 +15,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.adapter.ListStoryAdapter
+import com.tezaalfian.storyapp.adapter.LoadingStateAdapter
 import com.tezaalfian.storyapp.databinding.ActivityMainBinding
 import com.tezaalfian.storyapp.ui.StoryViewModelFactory
 import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.data.response.ListStoryItem
+import com.tezaalfian.storyapp.data.remote.response.ListStoryItem
 import com.tezaalfian.storyapp.ui.detail.DetailActivity
 import com.tezaalfian.storyapp.ui.map.MapsActivity
 import com.tezaalfian.storyapp.ui.story.StoryActivity
@@ -58,43 +60,18 @@ class MainActivity : AppCompatActivity() {
         }
         mainViewModel.getToken().observe(this){ token ->
             if (token.isNotEmpty()){
-                mainViewModel.getStories(token).observe(this){result ->
-                    if (result != null){
-                        when(result) {
-                            is Result.Loading -> {
-                                binding.progressBar.visibility = View.VISIBLE
-                            }
-                            is Result.Success -> {
-                                binding.progressBar.visibility = View.GONE
-                                val stories = result.data.listStory
-                                val listStoryAdapter = ListStoryAdapter(stories as ArrayList<ListStoryItem>)
-                                binding.rvStories.adapter = listStoryAdapter
-
-                                listStoryAdapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback {
-                                    override fun onItemClicked(data: ListStoryItem) {
-                                        showSelectedStory(data)
-                                    }
-                                })
-                            }
-                            is Result.Error -> {
-                                binding.progressBar.visibility = View.GONE
-                                Toast.makeText(
-                                    this,
-                                    "Failure : " + result.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+                val adapter = ListStoryAdapter()
+                binding.rvStories.adapter = adapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter {
+                        adapter.retry()
                     }
+                )
+                mainViewModel.getStories(token).observe(this){result ->
+                    Log.d("MainActivity", result.toString())
+                    adapter.submitData(lifecycle, result)
                 }
             }
         }
-    }
-
-    private fun showSelectedStory(story: ListStoryItem) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.EXTRA_STORY, story)
-        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

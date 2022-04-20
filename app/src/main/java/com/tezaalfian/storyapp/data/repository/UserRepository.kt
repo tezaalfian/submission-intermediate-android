@@ -8,9 +8,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.data.response.LoginResponse
-import com.tezaalfian.storyapp.data.response.RegisterResponse
-import com.tezaalfian.storyapp.data.retrofit.ApiService
+import com.tezaalfian.storyapp.data.remote.response.LoginResponse
+import com.tezaalfian.storyapp.data.remote.response.RegisterResponse
+import com.tezaalfian.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import retrofit2.HttpException

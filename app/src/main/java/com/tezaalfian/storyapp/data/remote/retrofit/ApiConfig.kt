@@ -1,4 +1,4 @@
-package com.tezaalfian.storyapp.data.retrofit
+package com.tezaalfian.storyapp.data.remote.retrofit
 
 import com.tezaalfian.storyapp.BuildConfig
 import okhttp3.OkHttpClient

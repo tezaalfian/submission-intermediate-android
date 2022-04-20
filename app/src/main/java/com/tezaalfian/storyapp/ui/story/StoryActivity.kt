@@ -41,6 +41,8 @@ class StoryActivity : AppCompatActivity() {
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        title = "Upload Story"
+
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,

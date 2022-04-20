@@ -32,7 +32,7 @@ class StoryViewModelFactory private constructor(private val userRepo: UserReposi
         private var instance: StoryViewModelFactory? = null
         fun getInstance(context: Context): StoryViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: StoryViewModelFactory(UserInjection.provideRepository(context), StoryInjection.provideRepository())
+                instance ?: StoryViewModelFactory(UserInjection.provideRepository(context), StoryInjection.provideRepository(context))
             }.also { instance = it }
     }
 }

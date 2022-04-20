@@ -1,9 +1,9 @@
-package com.tezaalfian.storyapp.data.retrofit
+package com.tezaalfian.storyapp.data.remote.retrofit
 
-import com.tezaalfian.storyapp.data.response.UploadStoryResponse
-import com.tezaalfian.storyapp.data.response.LoginResponse
-import com.tezaalfian.storyapp.data.response.RegisterResponse
-import com.tezaalfian.storyapp.data.response.StoriesResponse
+import com.tezaalfian.storyapp.data.remote.response.UploadStoryResponse
+import com.tezaalfian.storyapp.data.remote.response.LoginResponse
+import com.tezaalfian.storyapp.data.remote.response.RegisterResponse
+import com.tezaalfian.storyapp.data.remote.response.StoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -28,6 +28,9 @@ interface ApiService {
     @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("location") location: Int = 0
     ): StoriesResponse
 
     @Multipart

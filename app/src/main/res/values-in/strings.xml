@@ -33,4 +33,7 @@
     <string name="setting">Pengaturan</string>
     <string name="login_error">Masuk gagal, silahkan coba lagi!</string>
     <string name="signup_error">Daftar gagal, silahkan coba lagi!</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">Lokasi</string>
+    <string name="retry">Retry</string>
 </resources>

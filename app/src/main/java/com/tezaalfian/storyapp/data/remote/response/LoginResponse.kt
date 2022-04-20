@@ -1,8 +1,11 @@
-package com.tezaalfian.storyapp.data.response
+package com.tezaalfian.storyapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterResponse(
+data class LoginResponse(
+
+	@field:SerializedName("loginResult")
+	val loginResult: LoginResult? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean,

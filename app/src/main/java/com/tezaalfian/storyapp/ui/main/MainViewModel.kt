@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.tezaalfian.storyapp.data.local.entity.Story
 import com.tezaalfian.storyapp.data.repository.StoryRepository
 import com.tezaalfian.storyapp.data.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -24,5 +27,6 @@ class MainViewModel(private val userRepo: UserRepository, private val storyRepo:
         }
     }
 
-    fun getStories(token: String) = storyRepo.getStories(token)
+    fun getStories(token: String) : LiveData<PagingData<Story>> =
+        storyRepo.getStories(token).cachedIn(viewModelScope)
 }
