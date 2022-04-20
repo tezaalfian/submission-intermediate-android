@@ -8,6 +8,7 @@ import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.StoryRemoteMediator
 import com.tezaalfian.storyapp.data.local.entity.Story
 import com.tezaalfian.storyapp.data.local.room.StoryDatabase
+import com.tezaalfian.storyapp.data.remote.response.StoriesResponse
 import com.tezaalfian.storyapp.data.remote.response.UploadStoryResponse
 import com.tezaalfian.storyapp.data.remote.retrofit.ApiService
 import okhttp3.MultipartBody
@@ -29,14 +30,22 @@ class StoryRepository(private val apiService: ApiService, private val storyDatab
         ).liveData
     }
 
-    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, desc: RequestBody): LiveData<Result<UploadStoryResponse>> = liveData{
+    fun getStoriesLocation(token: String) : LiveData<Result<StoriesResponse>> = liveData{
         emit(Result.Loading)
         try {
-            val client = apiService.uploadStory("Bearer $token",imageMultipart, desc)
+            val client = apiService.getStories("Bearer $token", location = 1)
             emit(Result.Success(client))
         }catch (e : Exception){
-            e.printStackTrace()
-            Log.d("StoryRepository", "uploadStory: ${e.message.toString()} ")
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, desc: RequestBody, lat: RequestBody?, lon: RequestBody?): LiveData<Result<UploadStoryResponse>> = liveData{
+        emit(Result.Loading)
+        try {
+            val client = apiService.uploadStory("Bearer $token",imageMultipart, desc, lat, lon)
+            emit(Result.Success(client))
+        }catch (e : Exception){
             emit(Result.Error(e.message.toString()))
         }
     }

@@ -8,6 +8,8 @@ import com.tezaalfian.storyapp.data.repository.UserRepository
 import com.tezaalfian.storyapp.di.StoryInjection
 import com.tezaalfian.storyapp.di.UserInjection
 import com.tezaalfian.storyapp.ui.main.MainViewModel
+import com.tezaalfian.storyapp.ui.map.MapsActivity
+import com.tezaalfian.storyapp.ui.map.MapsViewModel
 import com.tezaalfian.storyapp.ui.story.StoryViewModel
 
 class StoryViewModelFactory private constructor(private val userRepo: UserRepository, private val storyRepo: StoryRepository) :
@@ -20,6 +22,9 @@ class StoryViewModelFactory private constructor(private val userRepo: UserReposi
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
                 StoryViewModel(userRepo, storyRepo) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepo) as T
             }
             else -> {
                 throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

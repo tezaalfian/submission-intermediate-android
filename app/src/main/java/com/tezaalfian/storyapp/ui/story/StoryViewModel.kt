@@ -14,5 +14,11 @@ class StoryViewModel(private val userRepo: UserRepository, private val storyRepo
         return userRepo.getToken().asLiveData()
     }
 
-    fun uploadStory(token: String, imageMultipart: MultipartBody.Part, desc: RequestBody) = storyRepo.uploadStory(token, imageMultipart, desc)
+    fun uploadStory(
+        token: String,
+        imageMultipart: MultipartBody.Part,
+        desc: RequestBody,
+        lat: RequestBody?,
+        lon: RequestBody?
+    ) = storyRepo.uploadStory(token, imageMultipart, desc, lat, lon)
 }

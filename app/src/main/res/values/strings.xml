@@ -36,4 +36,9 @@
     <string name="maps">Maps</string>
     <string name="title_activity_maps">Location</string>
     <string name="retry">Retry</string>
+    <string name="location_not_found">Location is not found. Try Again</string>
+    <string name="my_location">My Location</string>
+    <string name="map_style_error">Style parsing failed.</string>
+    <string name="map_style_nope">\"Can\'t find style. Error: \"</string>
+    <string name="share_my_location">Share my location</string>
 </resources>

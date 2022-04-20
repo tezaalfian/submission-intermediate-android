@@ -53,6 +53,15 @@
         app:layout_constraintStart_toStartOf="@+id/previewImageView"
         app:layout_constraintTop_toBottomOf="@id/btn_gallery" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/share_my_location"
+        app:layout_constraintEnd_toEndOf="@+id/previewImageView"
+        app:layout_constraintStart_toStartOf="@+id/previewImageView"
+        app:layout_constraintTop_toBottomOf="@+id/edt_desc" />
+
     <Button
         android:id="@+id/btn_upload"
         android:layout_width="0dp"
@@ -73,16 +82,22 @@
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+    <RelativeLayout
+        android:id="@+id/view_progressbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@color/transparent_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

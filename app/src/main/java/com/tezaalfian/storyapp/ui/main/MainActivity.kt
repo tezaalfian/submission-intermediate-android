@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         mainViewModel.getToken().observe(this){ token ->
+            this.token = token
             if (token.isNotEmpty()){
                 val adapter = ListStoryAdapter()
                 binding.rvStories.adapter = adapter.withLoadStateFooter(
@@ -98,7 +100,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.map_menu -> {
-                startActivity(Intent(this, MapsActivity::class.java))
+                val intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra(MapsActivity.EXTRA_TOKEN, token)
+                startActivity(intent)
                 true
             }
             else -> true
