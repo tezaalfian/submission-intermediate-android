@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login() {
         val email = binding.edtEmail.text.toString().trim()
-        val password = binding.edtPassword.text.toString().trim()
+        val password = binding.edtPassword.text.toString()
         when {
             email.isEmpty() -> {
                 binding.edtEmail.error = resources.getString(R.string.message_validation, "email")

@@ -33,4 +33,6 @@
     <string name="setting">Setting</string>
     <string name="login_error">Login failed, please try again!</string>
     <string name="signup_error">Signup failed, please try again!</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

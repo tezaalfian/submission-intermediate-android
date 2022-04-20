@@ -64,61 +64,65 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.btnSignup.setOnClickListener {
-            val name = binding.edtName.text.toString().trim()
-            val email = binding.edtEmail.text.toString().trim()
-            val password = binding.edtPassword.text.toString().trim()
-            when {
-                name.isEmpty() -> {
-                    binding.edtName.error = resources.getString(R.string.message_validation, "name")
-                }
-                email.isEmpty() -> {
-                    binding.edtEmail.error = resources.getString(R.string.message_validation, "email")
-                }
-                password.isEmpty() -> {
-                    binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
-                }
-                else -> {
-                    signupViewModel.register(name, email, password).observe(this){ result ->
-                        if (result != null){
-                            when(result) {
-                                is Result.Loading -> {
-                                    showLoading(true)
-                                }
-                                is Result.Success -> {
-                                    showLoading(false)
-                                    val user = result.data
-                                        if (user.error){
-                                            Toast.makeText(this@SignupActivity, user.message, Toast.LENGTH_SHORT).show()
-                                        }else{
-                                            AlertDialog.Builder(this@SignupActivity).apply {
-                                                setTitle("Yeah!")
-                                                setMessage("Your account successfully created!")
-                                                setPositiveButton("Next") { _, _ ->
-                                                    finish()
-                                                }
-                                                create()
-                                                show()
-                                            }
-                                        }
-                                }
-                                is Result.Error -> {
-                                    showLoading(false)
-                                    Toast.makeText(
-                                        this,
-                                        resources.getString(R.string.signup_error),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            register()
         }
 
         binding.tvLogin.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun register() {
+        val name = binding.edtName.text.toString().trim()
+        val email = binding.edtEmail.text.toString().trim()
+        val password = binding.edtPassword.text.toString()
+        when {
+            name.isEmpty() -> {
+                binding.edtName.error = resources.getString(R.string.message_validation, "name")
+            }
+            email.isEmpty() -> {
+                binding.edtEmail.error = resources.getString(R.string.message_validation, "email")
+            }
+            password.isEmpty() -> {
+                binding.edtPassword.error = resources.getString(R.string.message_validation, "password")
+            }
+            else -> {
+                signupViewModel.register(name, email, password).observe(this){ result ->
+                    if (result != null){
+                        when(result) {
+                            is Result.Loading -> {
+                                showLoading(true)
+                            }
+                            is Result.Success -> {
+                                showLoading(false)
+                                val user = result.data
+                                if (user.error){
+                                    Toast.makeText(this@SignupActivity, user.message, Toast.LENGTH_SHORT).show()
+                                }else{
+                                    AlertDialog.Builder(this@SignupActivity).apply {
+                                        setTitle("Yeah!")
+                                        setMessage("Your account successfully created!")
+                                        setPositiveButton("Next") { _, _ ->
+                                            finish()
+                                        }
+                                        create()
+                                        show()
+                                    }
+                                }
+                            }
+                            is Result.Error -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this,
+                                    resources.getString(R.string.signup_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

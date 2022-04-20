@@ -20,6 +20,7 @@ import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.response.ListStoryItem
 import com.tezaalfian.storyapp.ui.detail.DetailActivity
+import com.tezaalfian.storyapp.ui.map.MapsActivity
 import com.tezaalfian.storyapp.ui.story.StoryActivity
 
 class MainActivity : AppCompatActivity() {
@@ -115,6 +116,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.setting -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                true
+            }
+            R.id.map_menu -> {
+                startActivity(Intent(this, MapsActivity::class.java))
                 true
             }
             else -> true
