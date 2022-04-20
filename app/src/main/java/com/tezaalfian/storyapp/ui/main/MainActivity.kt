@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         title = "Story"
         setupViewModel()
+        setupAction()
+    }
+
+    private fun setupAction() {
+        binding.fabAddStory.setOnClickListener {
+            startActivity(Intent(this, StoryActivity::class.java))
+        }
     }
 
     private fun setupViewModel() {
@@ -67,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 )
                 mainViewModel.getStories(token).observe(this){result ->
-                    Log.d("MainActivity", result.toString())
                     adapter.submitData(lifecycle, result)
                 }
             }
@@ -85,10 +91,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.logout -> {
                 mainViewModel.logout()
-                true
-            }
-            R.id.add_story -> {
-                startActivity(Intent(this, StoryActivity::class.java))
                 true
             }
             R.id.setting -> {
