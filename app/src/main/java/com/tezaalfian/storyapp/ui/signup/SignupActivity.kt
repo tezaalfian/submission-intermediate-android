@@ -2,7 +2,6 @@ package com.tezaalfian.storyapp.ui.signup
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.databinding.ActivitySignupBinding
 import com.tezaalfian.storyapp.ui.UserViewModelFactory
-import com.tezaalfian.storyapp.ui.login.LoginActivity
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.utils.animateVisibility
 

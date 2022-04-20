@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.data.local.entity.Story
-import com.tezaalfian.storyapp.data.remote.response.ListStoryItem
 import com.tezaalfian.storyapp.databinding.ItemStoryBinding
 import com.tezaalfian.storyapp.ui.detail.DetailActivity
 
@@ -20,10 +19,6 @@ class ListStoryAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data: ListStoryItem)
     }
 
     class MyViewHolder(private val binding: ItemStoryBinding) :

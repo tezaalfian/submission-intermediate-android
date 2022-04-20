@@ -22,8 +22,6 @@
     <string name="avatar">avatar</string>
     <string name="username">username</string>
     <string name="message_validation">Enter your %1$s</string>
-    <string name="next">Next</string>
-    <string name="login_success">Login success!</string>
     <string name="created_at">Created At</string>
     <string name="description">Description</string>
     <string name="add_story">Add Story</string>

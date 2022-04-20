@@ -8,7 +8,6 @@ import com.tezaalfian.storyapp.data.repository.UserRepository
 import com.tezaalfian.storyapp.di.StoryInjection
 import com.tezaalfian.storyapp.di.UserInjection
 import com.tezaalfian.storyapp.ui.main.MainViewModel
-import com.tezaalfian.storyapp.ui.map.MapsActivity
 import com.tezaalfian.storyapp.ui.map.MapsViewModel
 import com.tezaalfian.storyapp.ui.story.StoryViewModel
 

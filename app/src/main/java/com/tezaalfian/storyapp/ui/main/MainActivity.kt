@@ -5,11 +5,8 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +16,6 @@ import com.tezaalfian.storyapp.adapter.LoadingStateAdapter
 import com.tezaalfian.storyapp.databinding.ActivityMainBinding
 import com.tezaalfian.storyapp.ui.StoryViewModelFactory
 import com.tezaalfian.storyapp.ui.login.LoginActivity
-import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.data.remote.response.ListStoryItem
-import com.tezaalfian.storyapp.ui.detail.DetailActivity
 import com.tezaalfian.storyapp.ui.map.MapsActivity
 import com.tezaalfian.storyapp.ui.story.StoryActivity
 

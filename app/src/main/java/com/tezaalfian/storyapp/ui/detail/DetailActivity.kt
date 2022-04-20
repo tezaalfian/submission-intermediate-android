@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.data.local.entity.Story
-import com.tezaalfian.storyapp.data.remote.response.ListStoryItem
 import com.tezaalfian.storyapp.databinding.ActivityDetailBinding
 import com.tezaalfian.storyapp.utils.setLocalDateFormat
 
