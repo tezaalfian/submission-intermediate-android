@@ -21,7 +21,7 @@ import com.tezaalfian.storyapp.R
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.databinding.ActivityStoryBinding
 import com.tezaalfian.storyapp.ui.StoryViewModelFactory
-import com.tezaalfian.storyapp.ui.login.LoginActivity
+import com.tezaalfian.storyapp.ui.map.MapsActivity
 import com.tezaalfian.storyapp.utils.MediaUtils
 import com.tezaalfian.storyapp.utils.animateVisibility
 import okhttp3.MediaType.Companion.toMediaType
@@ -46,6 +46,8 @@ class StoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        token = intent.getStringExtra(MapsActivity.EXTRA_TOKEN).toString()
 
         title = "Upload Story"
 
@@ -109,15 +111,6 @@ class StoryActivity : AppCompatActivity() {
             this,
             factory
         )[StoryViewModel::class.java]
-
-        storyViewModel.getToken().observe(this){ token ->
-            if (token.isEmpty()){
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }else{
-                this.token = token
-            }
-        }
     }
 
     override fun onRequestPermissionsResult(
@@ -255,5 +248,6 @@ class StoryActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        const val EXTRA_TOKEN = "extra_token"
     }
 }

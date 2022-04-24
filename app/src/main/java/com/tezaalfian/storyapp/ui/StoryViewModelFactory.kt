@@ -20,7 +20,7 @@ class StoryViewModelFactory private constructor(private val userRepo: UserReposi
                 MainViewModel(userRepo, storyRepo) as T
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
-                StoryViewModel(userRepo, storyRepo) as T
+                StoryViewModel(storyRepo) as T
             }
             modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
                 MapsViewModel(storyRepo) as T

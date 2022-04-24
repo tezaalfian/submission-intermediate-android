@@ -43,7 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.fabAddStory.setOnClickListener {
-            startActivity(Intent(this, StoryActivity::class.java))
+            val intent = Intent(this, StoryActivity::class.java)
+            intent.putExtra(StoryActivity.EXTRA_TOKEN, token)
+            startActivity(intent)
         }
     }
 

@@ -91,6 +91,8 @@ class LoginActivity : AppCompatActivity() {
                                 }else{
                                     val token = user.loginResult?.token ?: ""
                                     loginViewModel.setToken(token, true)
+                                    startActivity(Intent(this, MainActivity::class.java))
+                                    finish()
                                 }
                             }
                             is Result.Error -> {
@@ -111,13 +113,6 @@ class LoginActivity : AppCompatActivity() {
     private fun setupViewModel() {
         val factory: UserViewModelFactory = UserViewModelFactory.getInstance(this)
         loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
-
-        loginViewModel.getToken().observe(this){ token ->
-            if (token.isNotEmpty()){
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            }
-        }
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -2,7 +2,7 @@ package com.tezaalfian.storyapp.data.remote.retrofit
 
 import com.tezaalfian.storyapp.data.remote.response.UploadStoryResponse
 import com.tezaalfian.storyapp.data.remote.response.LoginResponse
-import com.tezaalfian.storyapp.data.remote.response.RegisterResponse
+import com.tezaalfian.storyapp.data.remote.response.SignupResponse
 import com.tezaalfian.storyapp.data.remote.response.StoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -16,7 +16,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): RegisterResponse
+    ): SignupResponse
 
     @FormUrlEncoded
     @POST("login")

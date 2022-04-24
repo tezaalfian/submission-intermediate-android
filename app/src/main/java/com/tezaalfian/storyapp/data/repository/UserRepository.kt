@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.tezaalfian.storyapp.data.Result
 import com.tezaalfian.storyapp.data.remote.response.LoginResponse
-import com.tezaalfian.storyapp.data.remote.response.RegisterResponse
+import com.tezaalfian.storyapp.data.remote.response.SignupResponse
 import com.tezaalfian.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -21,7 +21,7 @@ class UserRepository private constructor(
     private val apiService: ApiService
 ){
 
-    fun register(name: String, email: String, password: String) : LiveData<Result<RegisterResponse>> = liveData {
+    fun register(name: String, email: String, password: String) : LiveData<Result<SignupResponse>> = liveData {
         emit(Result.Loading)
         try {
             val result = apiService.register(name, email, password)

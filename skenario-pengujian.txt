@@ -1,0 +1,91 @@
+Unit Test
+
+# SignupViewModel
+1. Signup Berhasil
+- Memastikan mengembalikan Result.Success
+- Memastikan response tidak bernilai null
+- Memastikan bahwa method userRepository.register telah dipanggil
+- memastikan actual response dan dummy sama
+2. Signup Gagal
+- Memastikan response tidak bernilai null
+- Memastikan mengembalikan Result.Error
+
+# LoginViewModel
+1. Login Berhasil
+- Memastikan mengembalikan Result.Success
+- Memastikan response tidak bernilai null
+- Memastikan bahwa method login telah dipanggil
+- memastikan actual response dan dummy sama
+2. Login Gagal
+- Memastikan response tidak bernilai null
+- Memastikan mengembalikan Result.Error
+3. Menyimpan token
+- Memastikan bahwa token berhasil disimpan
+
+# MainViewModel
+1. Memanggil token berhasil
+- Memastikan bahwa token berhasil dipanggil
+- Memastikan bahwa token tidak bernilai null
+
+2. Logout berhasil
+- Memastikan logout berhasil
+- Memastikan method userRepository.logout telah dipanggil
+
+3. Memanggil session login berhasil
+- Memastikan bahwa session berhasil dipanggil
+- Memastikan bahwa session tidak bernilai null
+
+4. Memanggil data list story berhasil
+- memastikan data dengan paging berhasil dipanggil
+- memastikan data tidak bernilai null
+- memastikan jumlah data dummy dan aktual sama
+
+# MapsViewModel
+1. Memanggil list story location berhasil
+- Memastikan data tidak bernilai null
+- Memastikan response mengembalikan Result.Success
+- Memastikan data dummy sama dengan aktual
+- Memastikan jumlah data sama
+2. Memanggil list story location gagal
+- Memastikan data tidak bernilai null
+- Memastikan mengembalikan Result.Error
+
+# StoryViewModel
+1. Upload data story berhasil
+- memastikan bahwa response tidak null
+- memastikan bahwa response mengembalikan Result.Success
+
+2. Upload data story gagal
+- memastikan bahwa response tidak null
+- memastikan bahwa response mengembalikan Result.Error
+
+# UserRepository
+1. Login berhasil
+- memastikan bahwa response tidak null
+- memastikan bahwa data dummy sama dengan data aktual
+2. Register berhasil
+- memastikan bahwa response tidak null
+- memastikan bahwa data dummy sama dengan data aktual
+
+# StoryRepository
+1. Mendapatkan data story dengan lokasi berhasil
+- memastikan bahwa data tidak null
+- memastikan bahwa data aktual sama dengan data expected
+
+2. Upload story berhasil
+- Memastikan upload story berhasil dan response tidak null
+- memastikan response aktual sama dengan expected response
+
+3. Mendapatkan data story dengan paging berhasil
+- memastikan bahwa data tidak null
+- memastikan bahwa data aktual sama dengan data expected
+
+#MainActivityTest
+1. List Story berhasil
+- memastikan activity telah terbuka
+- memastikan recycleview telah tampil pada layar
+
+1. List Story gagal
+- memastikan activity telah terbuka
+- memastikan pesan error tampil
+

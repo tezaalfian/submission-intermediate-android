@@ -10,6 +10,7 @@ import com.tezaalfian.storyapp.data.local.room.StoryDatabase
 import com.tezaalfian.storyapp.data.remote.response.StoriesResponse
 import com.tezaalfian.storyapp.data.remote.response.UploadStoryResponse
 import com.tezaalfian.storyapp.data.remote.retrofit.ApiService
+import com.tezaalfian.storyapp.utils.wrapEspressoIdlingResource
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.lang.Exception
@@ -17,16 +18,18 @@ import java.lang.Exception
 class StoryRepository(private val apiService: ApiService, private val storyDatabase: StoryDatabase){
 
     fun getStories(token: String): LiveData<PagingData<Story>>{
-        @OptIn(ExperimentalPagingApi::class)
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            remoteMediator = StoryRemoteMediator(storyDatabase, apiService, token),
-            pagingSourceFactory = {
-                storyDatabase.storyDao().getAllStories()
-            }
-        ).liveData
+        wrapEspressoIdlingResource {
+            @OptIn(ExperimentalPagingApi::class)
+            return Pager(
+                config = PagingConfig(
+                    pageSize = 5
+                ),
+                remoteMediator = StoryRemoteMediator(storyDatabase, apiService, token),
+                pagingSourceFactory = {
+                    storyDatabase.storyDao().getAllStories()
+                }
+            ).liveData
+        }
     }
 
     fun getStoriesLocation(token: String) : LiveData<Result<StoriesResponse>> = liveData{
