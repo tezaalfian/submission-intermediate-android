@@ -22,8 +22,6 @@
     <string name="avatar">avatar</string>
     <string name="username">username</string>
     <string name="message_validation">Masukan %1$s</string>
-    <string name="next">Lanjut</string>
-    <string name="login_success">Login berhasil!</string>
     <string name="created_at">Dibuat pada</string>
     <string name="description">Deskripsi</string>
     <string name="add_story">Tambah Stori</string>
@@ -33,4 +31,12 @@
     <string name="setting">Pengaturan</string>
     <string name="login_error">Masuk gagal, silahkan coba lagi!</string>
     <string name="signup_error">Daftar gagal, silahkan coba lagi!</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">Lokasi</string>
+    <string name="retry">Coba lagi</string>
+    <string name="location_not_found">Lokasi tidak ditemukan. Coba lagi</string>
+    <string name="my_location">Lokasi Saya</string>
+    <string name="map_style_error">Style gagal diproses.</string>
+    <string name="map_style_nope">Tidak dapat menemukan style. Error:</string>
+    <string name="share_my_location">Bagikan lokasi</string>
 </resources>

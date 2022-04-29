@@ -8,11 +8,12 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.tezaalfian.storyapp.data.Result
-import com.tezaalfian.storyapp.data.response.LoginResponse
-import com.tezaalfian.storyapp.data.response.RegisterResponse
-import com.tezaalfian.storyapp.data.retrofit.ApiService
+import com.tezaalfian.storyapp.data.remote.response.LoginResponse
+import com.tezaalfian.storyapp.data.remote.response.SignupResponse
+import com.tezaalfian.storyapp.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import retrofit2.HttpException
 import java.lang.Exception
 
 class UserRepository private constructor(
@@ -20,14 +21,19 @@ class UserRepository private constructor(
     private val apiService: ApiService
 ){
 
-    fun register(name: String, email: String, password: String) : LiveData<Result<RegisterResponse>> = liveData {
+    fun register(name: String, email: String, password: String) : LiveData<Result<SignupResponse>> = liveData {
         emit(Result.Loading)
         try {
             val result = apiService.register(name, email, password)
             emit(Result.Success(result))
-        }catch (e : Exception){
-            e.printStackTrace()
-            emit(Result.Error(e.message.toString()))
+        }catch (throwable: HttpException){
+            try {
+                throwable.response()?.errorBody()?.source()?.let {
+                    emit(Result.Error(it.toString()))
+                }
+            } catch (exception: Exception) {
+                emit(Result.Error(exception.message.toString()))
+            }
         }
     }
 
@@ -36,9 +42,14 @@ class UserRepository private constructor(
         try {
             val result = apiService.login(email, password)
             emit(Result.Success(result))
-        }catch (e : Exception){
-            e.printStackTrace()
-            emit(Result.Error(e.message.toString()))
+        }catch (throwable: HttpException){
+            try {
+                throwable.response()?.errorBody()?.source()?.let {
+                    emit(Result.Error(it.toString()))
+                }
+            } catch (exception: Exception) {
+                emit(Result.Error(exception.message.toString()))
+            }
         }
     }
 

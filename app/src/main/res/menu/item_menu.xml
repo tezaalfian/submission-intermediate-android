@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/add_story"
-        android:icon="@drawable/ic_baseline_add_circle_outline_24"
-        android:title="@string/add_story"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/logout"
-        android:icon="@drawable/ic_baseline_power_settings_new_24"
-        android:title="@string/logout"
-        app:showAsAction="always" />
+        android:id="@+id/map_menu"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/maps"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/setting"
-        app:showAsAction="always" />
+        android:title="@string/setting" />
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout" />
 </menu>

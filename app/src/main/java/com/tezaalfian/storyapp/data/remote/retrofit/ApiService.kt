@@ -1,9 +1,9 @@
-package com.tezaalfian.storyapp.data.retrofit
+package com.tezaalfian.storyapp.data.remote.retrofit
 
-import com.tezaalfian.storyapp.data.response.UploadStoryResponse
-import com.tezaalfian.storyapp.data.response.LoginResponse
-import com.tezaalfian.storyapp.data.response.RegisterResponse
-import com.tezaalfian.storyapp.data.response.StoriesResponse
+import com.tezaalfian.storyapp.data.remote.response.UploadStoryResponse
+import com.tezaalfian.storyapp.data.remote.response.LoginResponse
+import com.tezaalfian.storyapp.data.remote.response.SignupResponse
+import com.tezaalfian.storyapp.data.remote.response.StoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -16,7 +16,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): RegisterResponse
+    ): SignupResponse
 
     @FormUrlEncoded
     @POST("login")
@@ -28,6 +28,9 @@ interface ApiService {
     @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("location") location: Int = 0
     ): StoriesResponse
 
     @Multipart
@@ -35,6 +38,8 @@ interface ApiService {
     suspend fun uploadStory(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody? = null,
+        @Part("lon") lon: RequestBody? = null
     ): UploadStoryResponse
 }

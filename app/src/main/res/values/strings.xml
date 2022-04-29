@@ -22,8 +22,6 @@
     <string name="avatar">avatar</string>
     <string name="username">username</string>
     <string name="message_validation">Enter your %1$s</string>
-    <string name="next">Next</string>
-    <string name="login_success">Login success!</string>
     <string name="created_at">Created At</string>
     <string name="description">Description</string>
     <string name="add_story">Add Story</string>
@@ -31,6 +29,14 @@
     <string name="input_your_image">Please upload your image first!</string>
     <string name="choose_picture">Choose a Picture</string>
     <string name="setting">Setting</string>
-    <string name="login_error">Login failure, please try again!</string>
-    <string name="signup_error">Signup failure, please try again!</string>
+    <string name="login_error">Login failed, please try again!</string>
+    <string name="signup_error">Signup failed, please try again!</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">Location</string>
+    <string name="retry">Retry</string>
+    <string name="location_not_found">Location is not found. Try Again</string>
+    <string name="my_location">My Location</string>
+    <string name="map_style_error">Style parsing failed.</string>
+    <string name="map_style_nope">\"Can\'t find style. Error: \"</string>
+    <string name="share_my_location">Share my location</string>
 </resources>
