@@ -26,8 +26,6 @@ class StoryViewModelTest {
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var userRepository: UserRepository
-    @Mock
     private lateinit var storyRepository: StoryRepository
     private lateinit var storyViewModel: StoryViewModel
     private val dummyToken = "jksfalkjflkjfaieoivmm"
@@ -37,7 +35,7 @@ class StoryViewModelTest {
 
     @Before
     fun setup() {
-        storyViewModel = StoryViewModel(userRepository, storyRepository)
+        storyViewModel = StoryViewModel(storyRepository)
     }
 
     @Test

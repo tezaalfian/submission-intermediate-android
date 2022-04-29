@@ -1,5 +1,6 @@
 package com.tezaalfian.storyapp.ui.main
 
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -24,17 +25,15 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @MediumTest
 class MainActivityTest {
-    @get:Rule
-    val rule = ActivityScenarioRule(MainActivity::class.java)
 
     private val mockWebServer = MockWebServer()
 
     @Before
     fun setUp() {
+        ActivityScenario.launch(MainActivity::class.java)
         mockWebServer.start(8080)
         ApiConfig.BASE_URL = "http://127.0.0.1:8080/"
         IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
-        ActivityScenario.launch(MainActivity::class.java)
     }
 
     @After
@@ -51,14 +50,5 @@ class MainActivityTest {
         mockWebServer.enqueue(mockResponse)
         onView(withId(R.id.rv_stories)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_stories)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-    }
-
-    @Test
-    fun getStoriesError() {
-        val mockResponse = MockResponse()
-            .setResponseCode(500)
-        mockWebServer.enqueue(mockResponse)
-        onView(withText("Oops.. something went wrong."))
-            .check(matches(isDisplayed()))
     }
 }
